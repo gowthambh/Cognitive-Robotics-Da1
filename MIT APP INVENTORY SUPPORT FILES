@@ -1,0 +1,35 @@
+When Screen1.Initialize
+    Call BluetoothClient1.DiscoverDevices
+
+When btnForward.Click
+    If BluetoothClient1.IsConnected
+        Call BluetoothClient1.SendText("F")
+
+When btnBackward.Click
+    If BluetoothClient1.IsConnected
+        Call BluetoothClient1.SendText("B")
+
+When btnLeft.Click
+    If BluetoothClient1.IsConnected
+        Call BluetoothClient1.SendText("L")
+
+When btnRight.Click
+    If BluetoothClient1.IsConnected
+        Call BluetoothClient1.SendText("R")
+
+When btnStop.Click
+    If BluetoothClient1.IsConnected
+        Call BluetoothClient1.SendText("S")
+
+
+
+
+When ListPicker1.BeforePicking
+    Set ListPicker1.Elements to BluetoothClient1.AddressesAndNames
+
+When ListPicker1.AfterPicking
+    Call BluetoothClient1.Connect(ListPicker1.Selection)
+    If BluetoothClient1.IsConnected
+        Set lblStatus.Text to "Connected to: " + ListPicker1.Selection
+    Else
+        Set lblStatus.Text to "Connection Failed"
